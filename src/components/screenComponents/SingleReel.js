@@ -1,5 +1,5 @@
 import React, { useRef, useState,useEffect } from 'react'
-import { View,Dimensions, TouchableOpacity,Image,Text } from 'react-native'
+import { View,Dimensions, TouchableOpacity,Image,Text, StyleSheet } from 'react-native'
 import {Video} from 'expo-av';
 import Ionic from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -85,14 +85,15 @@ const SingleReel = ({item,index,currentIndex}) => {
             }}
         />
       </TouchableOpacity>
-      <Ionic name='volume-mute' style={{fontSize:volume ? 0 :20,color:'white',position:'absolute',top:windowHeight/2.3,left:windowWidth/2.3,backgroundColor:'rgba(52,52,52,0.6)',borderRadius:100,padding:volume ? 0 :20}} />
+      <Ionic name='volume-mute' 
+        style={[styles.iconVolume,{fontSize:volume ? 0 :20,top:windowHeight/2.3,left:windowWidth/2.3,padding:volume ? 0 :20}]} />
       
       <View style={{position:"absolute",width:windowWidth,zIndex:1,bottom:60,padding:10}}>
         <View style={{}}>
           <TouchableOpacity style={{width:150}}>
             <View style={{width:100,flexDirection:'row',alignItems:'center'}}>
-              <View style={{width:32,height:32,borderRadius:100,backgroundColor:'white',margin:10}}>
-                <Image source={item.postProfile} style={{width:'100%',height:'100%', resizeMode:'cover',borderRadius:100}} />
+              <View style={styles.viewImage}>
+                <Image source={item.postProfile} style={styles.image} />
               </View>
                 <Text style={{color:'white',fontSize:20}}>{item.title}</Text>
             </View>
@@ -105,7 +106,7 @@ const SingleReel = ({item,index,currentIndex}) => {
         </View>
       </View>
 
-      <View style={{position:'absolute',bottom:80,right:0,alignItems:'center',flexDirection:'column'}}>
+      <View style={styles.viewFunction}>
         <TouchableOpacity style={{padding:10}}
           onPress={() =>setLike(!like)}
         >
@@ -121,8 +122,8 @@ const SingleReel = ({item,index,currentIndex}) => {
         <TouchableOpacity style={{padding:10}}>
           <Feather name='more-vertical' style={{color:'white',fontSize:25}} />
         </TouchableOpacity>
-        <View style={{width:30,height:30,borderRadius:10,borderWidth:2,borderColor:'white',margin:10}}>
-          <Image source={item.postProfile} style={{width:'100%',height:'100%',borderRadius:10,resizeMode:'cover'}} />
+        <View style={styles.viewImageFunction}>
+          <Image source={item.postProfile} style={styles.imageFunction} />
         </View>
 
       </View>
@@ -131,5 +132,14 @@ const SingleReel = ({item,index,currentIndex}) => {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  iconVolume:{color:'white',position:'absolute',backgroundColor:'rgba(52,52,52,0.6)',borderRadius:100,}
+  ,viewImage:{width:32,height:32,borderRadius:100,backgroundColor:'white',margin:10},
+  image:{width:'100%',height:'100%', resizeMode:'cover',borderRadius:100},
+  viewFunction:{position:'absolute',bottom:80,right:0,alignItems:'center',flexDirection:'column'},
+  viewImageFunction:{width:30,height:30,borderRadius:10,borderWidth:2,borderColor:'white',margin:10},
+  imageFunction:{width:'100%',height:'100%',borderRadius:10,resizeMode:'cover'}
+})
 
 export default SingleReel

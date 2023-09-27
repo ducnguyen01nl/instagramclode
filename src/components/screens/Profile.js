@@ -1,5 +1,5 @@
 import React from 'react'
-import { View,Text, ScrollView } from 'react-native'
+import { View,Text, ScrollView, StyleSheet } from 'react-native'
 import { ProfileBody, ProfileButtons } from '../screenComponents/ProfileBody'
 import Entypo from 'react-native-vector-icons/Entypo'
 import BottomTabView from '../screenComponents/BottomTabView'
@@ -14,12 +14,12 @@ const Profile = () => {
       <View key={index}>
         {
           index === 0 ? (
-            <View style={{width:60,height:60,borderRadius:100,borderWidth:1,opacity:0.7,marginHorizontal:5,justifyContent:'center',alignItems:'center'}}>
+            <View style={styles.itemStoryFirst}>
               <Entypo name="plus" style={{fontSize:40,color:'black'}} />
             </View>
           ) : (
 
-            <View style={{width:60,height:60,borderRadius:100,backgroundColor:'black',opacity:0.1,marginHorizontal:5}}></View>
+            <View style={styles.itemStory}></View>
           )
         }
       </View>
@@ -62,5 +62,10 @@ const Profile = () => {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  itemStoryFirst:{width:60,height:60,borderRadius:100,borderWidth:1,opacity:0.7,marginHorizontal:5,justifyContent:'center',alignItems:'center'},
+  itemStory:{width:60,height:60,borderRadius:100,backgroundColor:'black',opacity:0.1,marginHorizontal:5}
+})
 
 export default Profile

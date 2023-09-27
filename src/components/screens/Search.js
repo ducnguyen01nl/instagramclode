@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View,Text,Image, ScrollView, TouchableOpacity, StatusBar, Dimensions } from 'react-native'
+import { View,Text,Image, ScrollView, TouchableOpacity, StatusBar, Dimensions,StyleSheet } from 'react-native'
 import SearchBox from '../screenComponents/SearchBox'
 import SearchContent from '../screenComponents/SearchContent'
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -14,7 +14,7 @@ function Search() {
   const windowHeight = Dimensions.get('window').height;
 
   return (
-    <View style={{width:'100%',height:'100%',backgroundColor:'white',position:"relative"}}>
+    <View style={styles.containerSearch}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <SearchBox />
           <SearchContent data={getData} />
@@ -24,7 +24,7 @@ function Search() {
         </ScrollView>
         {
           image ? (
-            <View style={{position:'absolute',zIndex:1,width:'100%',height:'100%',backgroundColor:'rgba(52,52,52,52,0.8)'}}>
+            <View style={styles.viewImage}>
               <StatusBar backgroundColor="#525252" barStyle="dark-content" />
               <View style={{
                 position:'absolute',
@@ -38,7 +38,7 @@ function Search() {
                 elevation:50,
                 
               }}>
-                <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingVertical:10,paddingHorizontal:15}}>
+                <View style={styles.itemSearch}>
                   <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Image source={image} style={{width:30,height:30,borderRadius:100}} />
                     <View style={{paddingLeft:8}}>
@@ -58,5 +58,11 @@ function Search() {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  containerSearch:{width:'100%',height:'100%',backgroundColor:'white',position:"relative"},
+  viewImage:{position:'absolute',zIndex:1,width:'100%',height:'100%',backgroundColor:'rgba(52,52,52,52,0.8)'},
+  itemSearch:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingVertical:10,paddingHorizontal:15},
+})
 
 export default Search

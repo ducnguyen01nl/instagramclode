@@ -1,5 +1,5 @@
 import React from 'react'
-import { View ,Text, ScrollView} from 'react-native'
+import { View ,StyleSheet, ScrollView} from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
@@ -11,7 +11,7 @@ const BottomTabView = () => {
     for(let i =0;i<numberOfSquare;i++){
         squares.push(
             <View key={i}>
-                <View style={{width:130,height:150,marginVertical:0.5,backgroundColor:'black',opacity:0.1}}>
+                <View style={styles.item}>
 
                 </View>
             </View>
@@ -25,7 +25,7 @@ const BottomTabView = () => {
                 showsVerticalScrollIndicator={false}
                 style={{width:'100%',height:'100%'}}
             >
-                <View style={{width:'100%',height:'100%',backgroundColor:'white',flexWrap:'wrap',flexDirection:'row',paddingVertical:5,justifyContent:'space-between'}}>
+                <View style={styles.itemContainer}>
                     {squares}
                 </View>
             </ScrollView>
@@ -37,7 +37,7 @@ const BottomTabView = () => {
                 showsVerticalScrollIndicator={false}
                 style={{width:'100%',height:'100%'}}
             >
-                <View style={{width:'100%',height:'100%',backgroundColor:'white',flexWrap:'wrap',flexDirection:'row',paddingVertical:5,justifyContent:'space-between'}}>
+                <View style={styles.itemContainer}>
                     {squares}
                 </View>
             </ScrollView>
@@ -49,7 +49,7 @@ const BottomTabView = () => {
                 showsVerticalScrollIndicator={false}
                 style={{width:'100%',height:'100%'}}
             >
-                <View style={{width:'100%',height:'100%',backgroundColor:'white',flexWrap:'wrap',flexDirection:'row',paddingVertical:5,justifyContent:'space-between'}}>
+                <View style={styles.itemContainer}>
                     {squares}
                 </View>
             </ScrollView>
@@ -90,5 +90,12 @@ const BottomTabView = () => {
     </Tab.Navigator>
   )
 }
+
+const styles = StyleSheet.create({
+    item:{width:130,height:150,marginVertical:0.5,backgroundColor:'black',opacity:0.1},
+    itemContainer:{width:'100%',height:'100%',backgroundColor:'white',flexWrap:'wrap',flexDirection:'row',paddingVertical:5,justifyContent:'space-between'},
+
+    
+})
 
 export default BottomTabView

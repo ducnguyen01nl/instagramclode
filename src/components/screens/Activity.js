@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View,Text, ScrollView, TouchableOpacity,Image } from 'react-native'
+import { View,Text, ScrollView, TouchableOpacity,Image,StyleSheet } from 'react-native'
 import { FriendsProfileData } from '../screenComponents/Database'
 import  AntDesign from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
@@ -7,8 +7,8 @@ import { useNavigation } from '@react-navigation/native'
 function Activity() {
   const navigation = useNavigation();
   return (
-    <View style={{width:'100%',height:'100%',backgroundColor:'white'}}>
-        <Text style={{fontSize:20,fontWeight:'bold',borderBottomWidth:0.5,borderBottomColor:'#DEDEDE',padding:10}}>Activity</Text>
+    <View style={styles.containerActivity}>
+        <Text style={styles.title}>Activity</Text>
         <ScrollView style={{margin:10}} showsVerticalScrollIndicator={false}>
           <Text style={{fontWeight:'bold'}}>This week</Text>
           <View style={{flexDirection:'row', paddingVertical:10}}>
@@ -41,7 +41,7 @@ function Activity() {
               const [follow,setFollow] = useState(false);
               return(
                 <View key={index} style={{width:'100%'}}>
-                  <View style={{flexDirection:'row',justifyContent:"space-between",alignItems:'center',paddingVertical:20,width:'100%'}}>
+                  <View style={styles.viewFriendProfile}>
                     <TouchableOpacity 
                       onPress={() =>navigation.push("FriendProfile",{
                         name:data.name,
@@ -51,8 +51,8 @@ function Activity() {
                         followers:data.followers,
                         following:data.following
                       })}
-                      style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',maxWidth:'64%'}}>
-                      <Image source={data.profileImage}  style={{ width:45,height:45,borderRadius:100,margin:10}}/>
+                      style={styles.touchImage}>
+                      <Image source={data.profileImage}  style={styles.imageFriend}/>
                       <Text style={{fontSize:15}}>
                         <Text style={{fontWeight:'bold'}}>{data.name}</Text>
                         , who you might know, is on instagram
@@ -61,7 +61,7 @@ function Activity() {
                     <TouchableOpacity style={{width:follow ? 72 : 68}}
                       onPress={() => setFollow(!follow)}
                     >
-                      <View style={{width:'100%',height:30,borderRadius:5,backgroundColor:follow ? 'white' : '#3493D9',borderWidth:follow ? 1:0,borderColor:follow ? '#DEDEDE':null,justifyContent:'center',alignItems:'center'}}>
+                      <View style={[styles.textFollow,{backgroundColor:follow ? 'white' : '#3493D9',borderWidth:follow ? 1:0,borderColor:follow ? '#DEDEDE':null}]}>
                         <Text style={{color:follow ? 'black': 'white'}}>{follow ? "Following" : "Follow"}</Text>
                       </View>
                     </TouchableOpacity>
@@ -105,7 +105,7 @@ function Activity() {
                         <TouchableOpacity style={{width: follow ? 90 : 68}}
                           onPress={() =>setFollow(!follow)}
                         >
-                          <View style={{width:'100%',height:30,borderRadius:5,backgroundColor:follow ? null : '#3493D9', borderWidth:follow ? 1 : 0, borderColor:'#DEDEDE',justifyContent:'center',alignItems:'center'}}>
+                          <View style={[styles.styleFollow,{backgroundColor:follow ? null : '#3493D9', borderWidth:follow ? 1 : 0,}]}>
                             <Text style={{color:follow ? 'black' : 'white'}}>{follow ? 'following' : 'follow'}</Text>
 
                           </View>
@@ -116,7 +116,7 @@ function Activity() {
                           <TouchableOpacity style={{width: follow ? 90 : 68}}
                             onPress={() =>setFollow(!follow)}
                           >
-                            <View style={{width:'100%',height:30,borderRadius:5,backgroundColor:follow ? null : '#3493D9', borderWidth:follow ? 1 : 0, borderColor:'#DEDEDE',justifyContent:'center',alignItems:'center'}}>
+                            <View style={[styles.styleFollow,{backgroundColor:follow ? null : '#3493D9', borderWidth:follow ? 1 : 0,}]}>
                               <Text style={{color:follow ? 'black' : 'white'}}>{follow ? 'following' : 'follow'}</Text>
 
                             </View>
@@ -145,5 +145,16 @@ function Activity() {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  containerActivity:{width:'100%',height:'100%',backgroundColor:'white'},
+  title:{fontSize:20,fontWeight:'bold',borderBottomWidth:0.5,borderBottomColor:'#DEDEDE',padding:10},
+  viewFriendProfile:{flexDirection:'row',justifyContent:"space-between",alignItems:'center',paddingVertical:20,width:'100%'},
+  touchImage:{flexDirection:'row',justifyContent:'space-between',alignItems:'center',maxWidth:'64%'},
+  imageFriend:{ width:45,height:45,borderRadius:100,margin:10},
+  textFollow:{width:'100%',height:30,borderRadius:5,justifyContent:'center',alignItems:'center'},
+  styleFollow:{width:'100%',height:30,borderRadius:5, borderColor:'#DEDEDE',justifyContent:'center',alignItems:'center'},
+
+})
 
 export default Activity
